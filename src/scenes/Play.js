@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import Player from '../entities/Player';
+import Enemy from '../entities/Enemy';
 
 class PlayScene extends Phaser.Scene {
   constructor(config) {
@@ -12,8 +13,14 @@ class PlayScene extends Phaser.Scene {
     const layers = this.createLayers(map);
     const playerZones = this.getPlayerZones(layers.playerZones);
     const player = this.createPlayer(playerZones.start);
-
+    const enemy = this.createEnemy();
+    
     this.createPlayerColliders(player, {
+      colliders: {
+        platformsColliders: layers.platformsColliders,
+      },
+    });
+    this.createEnemyColliders(enemy, {
       colliders: {
         platformsColliders: layers.platformsColliders,
       },
@@ -42,8 +49,16 @@ class PlayScene extends Phaser.Scene {
     return new Player(this, start.x, start.y);
   }
 
+  createEnemy() {
+    return new Enemy(this, 200, 200);
+  }
+
   createPlayerColliders(player, { colliders }) {
     player.addCollider(colliders.platformsColliders);
+  }
+
+  createEnemyColliders(enemy, { colliders }) {
+    enemy.addCollider(colliders.platformsColliders);
   }
 
   setupFollowupCameraOn(player) {
