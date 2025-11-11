@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import initAnimations from './playerAnims'
+import collidable from '../mixins/collidable';
 
 class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
@@ -7,6 +8,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
+    Object.assign(this, collidable);
+    
     this.init();
     this.initEvents();
   }
@@ -27,6 +30,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
   }
 
+  
   update() {
     const { left, right, space, up } = this.cursors; 
     const isUpJustDown = Phaser.Input.Keyboard.JustDown(up);
