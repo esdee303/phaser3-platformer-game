@@ -23,6 +23,7 @@ class PlayScene extends Phaser.Scene {
     this.createEnemyColliders(enemy, {
       colliders: {
         platformsColliders: layers.platformsColliders,
+        player,
       },
     });
     this.createEndOfLevel(playerZones.end, player);
@@ -58,7 +59,7 @@ class PlayScene extends Phaser.Scene {
   }
 
   createEnemyColliders(enemy, { colliders }) {
-    enemy.addCollider(colliders.platformsColliders);
+    enemy.addCollider(colliders.platformsColliders).addCollider(colliders.player);
   }
 
   setupFollowupCameraOn(player) {
