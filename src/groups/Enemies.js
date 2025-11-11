@@ -1,5 +1,5 @@
-import Phaser from "phaser";
-import { ENEMY_TYPES } from "../types";
+import Phaser from 'phaser';
+import { ENEMY_TYPES } from '../types';
 import collidable from '../mixins/collidable';
 
 class Enemies extends Phaser.GameObjects.Group {
@@ -9,7 +9,7 @@ class Enemies extends Phaser.GameObjects.Group {
   }
 
   getTypes() {
-    return ENEMY_TYPES
+    return ENEMY_TYPES;
   }
 }
 

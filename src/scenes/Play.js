@@ -56,7 +56,6 @@ class PlayScene extends Phaser.Scene {
     const enemyTypes = enemies.getTypes();
 
     spawnLayer.objects.forEach((spawnPoint) => {
-
       const enemy = new enemyTypes[spawnPoint.type](this, spawnPoint.x, spawnPoint.y);
       enemies.add(enemy);
     });
