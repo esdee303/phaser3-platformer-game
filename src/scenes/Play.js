@@ -32,8 +32,9 @@ class PlayScene extends Phaser.Scene {
     const platformsColliders = map.createLayer('platforms_colliders', tileset);
     const environment = map.createLayer('environment', tileset);
     const platforms = map.createLayer('platforms', tileset);
+    const playerZones = map.getObjectLayer('player_zones').objects;
     platformsColliders.setCollisionByProperty({ collides: true });
-    return { environment, platforms, platformsColliders };
+    return { environment, platforms, platformsColliders, playerZones };
   }
 
   createPlayer() {
