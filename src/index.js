@@ -11,7 +11,7 @@ const SHARED_CONFIG = {
 };
 
 const Scenes = [PreloadScene, PlayScene];
-const createScene = Scene => new Scene(SHARED_CONFIG);
+const createScene = (Scene) => new Scene(SHARED_CONFIG);
 const initScenes = () => Scenes.map(createScene);
 
 const config = {

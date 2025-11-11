@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import initAnimations from './playerAnims'
+import initAnimations from './playerAnims';
 import collidable from '../mixins/collidable';
 
 class Player extends Phaser.Physics.Arcade.Sprite {
@@ -9,7 +9,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
 
     Object.assign(this, collidable);
-    
+
     this.init();
     this.initEvents();
   }
@@ -30,9 +30,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
   }
 
-  
   update() {
-    const { left, right, space, up } = this.cursors; 
+    const { left, right, space, up } = this.cursors;
     const isUpJustDown = Phaser.Input.Keyboard.JustDown(up);
     const onFloor = this.body.onFloor();
 
@@ -46,7 +45,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityX(0);
     }
 
-    if (isUpJustDown &&  (onFloor || this.jumpCount < this.consecutiveJumps)) {
+    if (isUpJustDown && (onFloor || this.jumpCount < this.consecutiveJumps)) {
       this.setVelocityY(-this.playerSpeed * 2);
       this.jumpCount++;
     }
@@ -54,7 +53,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     if (onFloor) {
       this.jumpCount = 0;
     }
-    onFloor ? this.body.velocity.x !== 0 ? this.play('run', true) : this.play('idle', true) : this.play('jump', true);
+    onFloor ? (this.body.velocity.x !== 0 ? this.play('run', true) : this.play('idle', true)) : this.play('jump', true);
   }
 }
 
