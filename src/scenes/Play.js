@@ -56,7 +56,7 @@ class PlayScene extends Phaser.Scene {
   createLayers(map) {
     const tileset = map.getTileset('main_lev_build_1');
     const platformsColliders = map.createLayer('platforms_colliders', tileset);
-    const environment = map.createLayer('environment', tileset);
+    const environment = map.createLayer('environment', tileset).setDepth(-2);
     const platforms = map.createLayer('platforms', tileset);
     const playerZones = map.getObjectLayer('player_zones');
     const enemySpawns = map.getObjectLayer('enemy_spawns');
@@ -74,7 +74,7 @@ class PlayScene extends Phaser.Scene {
 
     spawnLayer.objects.forEach((spawnPoint, i) => {
       if (i === 1) return ;
-      
+
       const enemy = new enemyTypes[spawnPoint.type](this, spawnPoint.x, spawnPoint.y);
       enemy.setPlatformColliders(platformsColliders);
       enemies.add(enemy);

@@ -16,7 +16,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.gravity = 500;
     this.speed = 150;
     this.platformCollidersLayer = null;
-    this.rayGraphics = this.scene.add.graphics({ lineStyle: { width: 2, color: 0xaa00aa } });
+    this.rayGraphics = this.scene.add.graphics({lineStyle: {width: 2, color: 0xaa00aa}});
     this.consecutiveJumps = 1;
     this.body.setGravityY(this.gravity);
     this.setSize(20, 45);
@@ -34,30 +34,15 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.platformCollidersLayer = platformCollidersLayer;
   }
 
-  raycast(body, layer, rayLength = 30) {
-    const { x, y, width, halfHeight } = body;
-    const line = new Phaser.Geom.Line();
-    let hasHit = false;
-
-    line.x1 = x + width;
-    line.y1 = y + halfHeight;
-    line.x2 = line.x1 + rayLength;
-    line.y2 = line.y1 + rayLength;
-
-    const hits = layer.getTilesWithinShape(line);
-
-    if (hits.length > 0) {
-      hasHit = hits.some(hit => hit.index !== -1);
-    }
-
-    return { ray: line, hasHit };
-  }
+ 
 
   update(time, delta) {
+    
     this.setVelocityX(30);
-    const { ray, hasHit } = this.raycast(this.body, this.platformCollidersLayer);
+    const { ray, hasHit } = this.raycast(this.body, this.platformCollidersLayer, 40, 2);
+    
     if (hasHit) {
-      console.info('hasHit')
+      
     }
     this.rayGraphics.clear();
     this.rayGraphics.strokeLineShape(ray);
